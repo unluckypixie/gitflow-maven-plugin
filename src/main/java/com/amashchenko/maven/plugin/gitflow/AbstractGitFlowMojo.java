@@ -160,6 +160,14 @@ public abstract class AbstractGitFlowMojo extends AbstractMojo {
     private boolean versionsForceUpdate = false;
 
     /**
+     * Whether to set -DprocessAllModules' when calling versions-maven-plugin.
+     * 
+     * @since 1.21.1
+     */
+    @Parameter(property = "versionsProcessAllModules", defaultValue = "false")
+    private Boolean versionsProcessAllModules;
+
+    /**
      * Property to set version to.
      *
      * @since 1.13.0
@@ -1173,6 +1181,9 @@ public abstract class AbstractGitFlowMojo extends AbstractMojo {
                 if (versionsForceUpdate) {
                     args.add("-DgroupId=");
                     args.add("-DartifactId=");
+                }
+                if (versionsProcessAllModules) {
+                    args.add("-DprocessAllModules");
                 }
             }
 
